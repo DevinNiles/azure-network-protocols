@@ -23,8 +23,9 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Activity 1 - install wire shark on VM
 - Activity 2 - inpsect packet data and use ICMP filter
 - Activity 3 - Network Security Groups(NSGs) effect on data traffic
-- Activity 4
-- Activity 5
+- Activity 4 - DCHP filter and trafiic
+- Activity 5 - DNS filter and traffic
+- Activity 6 - RDP filter and traffic
 
 <h2>Actions and Observations</h2>
 
@@ -40,14 +41,13 @@ First activity we want to do with this tutorial is to install wireshark from Wir
 <img> pic of unfiltered data and pic of ICMP filtered data
 </p>
 <p>
-when wireshark is initated, you will see the device is both sending and reeving lots of data, that is because even without interacing on the devices it is constantly having network activity. to see the specific trafic we want to see in this exersize we will use the filter section at the top of the window. The first protocall we want to observw is Internet Connection Media Protocl(ICMP), we wil type ICMP into the filter bar. IMCP is used when you want to ping a ip adress,
+when wireshark is initated, you will see the device is both sending and reeving lots of data, that is because even without interacing on the devices it is constantly having network activity. to see the specific trafic we want to see in this exersize we will use the filter section at the top of the window. The first protocall we want to observw is Internet Connection Media Protocl(ICMP), we wil type ICMP into the filter bar. IMCP is used when you want to ping a ip adress, ping is used to test the connection between two devices over the network. in the example above we ping a secondary VM, in wireshark we see the ping request and recived packets from the Vm we are using and from the secondary VM
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img azure NSGs settingss and constant pings before and after network change/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+in this next activity we will see what happens when we change the NSGs on the secondary to reject all incoming ping requests. First we will set up a constant ping command in our primary VM to ping the other VM endlessly, as before we get the same request nd recieved packets as before. We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and set it to reject all traffic and move this setting up in priority. after that is saved we will go backn to our vm and observe the difference in trafffc data
 <br />

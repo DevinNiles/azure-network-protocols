@@ -64,6 +64,23 @@ img command line with ipconfig /renew and wireshark showing triaffic captureed
   </p>
 
   <p>
-    in this next activity we will observe traffic involved with DHCP. in wireshark's filter bar we will put the filter DCHP, open command line as admin and we will run a command to ask for a new IP address. in command line we will run the command "ipconfig /renew" this will make the device brodast a signal to request a new IP andress. the DNS will see this signal and acknolage that request,
+    in this next activity we will observe traffic involved with DHCP. in wireshark's filter bar we will put the filter DCHP, open command line as admin and we will run a command to ask for a new IP address. in command line we will run the command "ipconfig /renew" this will make the device brodast a signal to request a new IP andress. the DNS will see this signal and acknolage that request, but since the device already has an IP address, the interaction ends there instead of the typical full interation when a device needs their first IP address, you can get the full paket traffic if you use the command /releaase but when using a remote desktop connection, it severs the connetion.
+  </p>
+
+  <p>
+    img wireshark traffic after ussing nslookup, command console with the nslookup results
+  </p>
+
+  <p>
+    Activity 4 - Obsevering DNS Traffic, in this ativity we will observe trafiic involved with DNS, Domain Naming System. the purpose of dns is to translate human readable website names into IP adresses. for this activity we will use the ommand line command "nslookup", with this command we can enter a website and get the IP address assosiated with it. First step is to enter the DNS filter in the filter bar on wireshark. in the pictures above we use nslookup to find the IP addresses of both disney.com and pixar.com, and in wireshark we can see all the traffic used to get that information   
+  </p>
+
+  <p>
+    img wireshark capture of all the spam traffic
+  </p>
+
+  <p>
+    Activity 5 - Remote Desktop Protocal (RDP)
+    in this activity we will observe all the traffic involving the RDP. RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389", this is the network port RDP uses to establish a connection
   </p>
 <br />

@@ -49,5 +49,21 @@ when wireshark is initated, you will see the device is both sending and reeving 
 <img azure NSGs settingss and constant pings before and after network change/>
 </p>
 <p>
-in this next activity we will see what happens when we change the NSGs on the secondary to reject all incoming ping requests. First we will set up a constant ping command in our primary VM to ping the other VM endlessly, as before we get the same request nd recieved packets as before. We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and set it to reject all traffic and move this setting up in priority. after that is saved we will go backn to our vm and observe the difference in trafffc data
+in this next activity we will see what happens when we change the NSGs on the secondary to reject all incoming ping requests. First we will set up a constant ping command in our primary VM to ping the other VM endlessly, as before we get the same request nd recieved packets as before. We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and set it to reject all traffic and move this setting up in priority. after that is saved we will go backn to our vm and observe the difference in trafffc data. In wireshark we see that all the oing requests timeot because the NSG on the secondary VM isnt sending a ping back, the NSG works somewhat like a firewall in this sense
+
+  <p>
+    img command line with commaand <ssh "username@<private ip> and wireshark packet recording of ssh data
+  </p>
+  <P>
+in this next activity we are going to observe the triffic recorded when using the SSH command to remotely connect to the secondry VM using the command line. first step is to put the "ssh" filter in the section of wireshark. next we will open the command line and input the command <ssh labuser@10.0.0.4>, labuser is the username one the secondary VM and 10.0.0.4 is the private ip address of the VM, type yes for the question to continue with you connections, next it will ask for the password. after connecting the command line will dispaly the username and IP of the vm we connected to, on wireshark there will be traffic that was used to established the connections. notice as well that any keystroke in the command line will create trafffic, tis is because the command line is directing controling the device and that data is sent over the network. also note thhat if you dive into the data captured with wireshark, you will see its all encrypted, all data sent using SSH is designed this way
+  </P>
+
+  <p>
+img command line with ipconfig /renew and wireshark showing triaffic captureed
+    
+  </p>
+
+  <p>
+    in this next activity we will observe traffic involved with DHCP. in wireshark's filter bar we will put the filter DCHP, open command line as admin and we will run a command to ask for a new IP address. in command line we will run the command "ipconfig /renew" this will make the device brodast a signal to request a new IP andress. the DNS will see this signal and acknolage that request,
+  </p>
 <br />

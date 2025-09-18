@@ -81,6 +81,6 @@ img command line with ipconfig /renew and wireshark showing triaffic captureed
 
   <p>
     Activity 5 - Remote Desktop Protocal (RDP)
-    in this activity we will observe all the traffic involving the RDP. RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389", this is the network port RDP uses to establish a connection
+    in this activity we will observe the traffic involving the RDP. RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389" into the filter bar, this is the network port RDP uses to establish a connection. After starting the packet capture we can already see lots of network activity, this is beause we are already remotely connected to the VM and thats the data we are seeing. The RDP connection is onstantly streaming an image to our personal device so the traffic is frequent and constant. comparing SSH to RDP, SSH only sends network data when we interat with the connection between the devices, where as RDP is always sending data whether we are typing or not.
   </p>
 <br />

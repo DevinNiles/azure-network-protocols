@@ -72,7 +72,12 @@ in this next activity we will see what happens when we change the Network Securi
 after the rule has been added and we go back to wireshark and the command consile we can see that the ping requests are not going through and the requests are timing out instead, THats because the NSGs on the linux machine is blocking all data related to ICMP. the NSG works somewhat like a firewall in this sense
 
   <p>
-    img command line with commaand <ssh "username@<private ip> and wireshark packet recording of ssh data
+
+<img width="1910" height="946" alt="wireshark ssh filtered" src="https://github.com/user-attachments/assets/949dbf54-bfe8-4b94-9579-4acefc26c39c" />
+
+<img width="1744" height="972" alt="ssh connection to linux" src="https://github.com/user-attachments/assets/4f72911b-d9ae-4a62-b1f3-e84781612477" />
+
+
   </p>
   <P>
 in this next activity we are going to observe the triffic recorded when using the SSH command to remotely connect to the secondry VM using the command line. first step is to put the "ssh" filter in the section of wireshark. next we will open the command line and input the command <ssh labuser@10.0.0.4>, labuser is the username one the secondary VM and 10.0.0.4 is the private ip address of the VM, type yes for the question to continue with you connections, next it will ask for the password. after connecting the command line will dispaly the username and IP of the vm we connected to, on wireshark there will be traffic that was used to established the connections. notice as well that any keystroke in the command line will create trafffic, tis is because the command line is directing controling the device and that data is sent over the network. also note thhat if you dive into the data captured with wireshark, you will see its all encrypted, all data sent using SSH is designed this way
@@ -80,7 +85,13 @@ in this next activity we are going to observe the triffic recorded when using th
 
   <p>
 img command line with ipconfig /renew and wireshark showing triaffic captureed
-    
+
+<img width="1210" height="904" alt="dhcp bat script command" src="https://github.com/user-attachments/assets/73bb8c4f-02ac-404a-8416-97803db94f72" />
+
+<img width="522" height="202" alt="dhcp renew release script" src="https://github.com/user-attachments/assets/3a02120b-601d-42e1-9153-a4b7fab37acf" />
+
+ <img width="1564" height="848" alt="dhcp wireshark activity" src="https://github.com/user-attachments/assets/52f0f3f5-2957-47f6-befb-30e49bb484dc" />
+
   </p>
 
   <p>
@@ -89,6 +100,11 @@ img command line with ipconfig /renew and wireshark showing triaffic captureed
 
   <p>
     img wireshark traffic after ussing nslookup, command console with the nslookup results
+
+   <img width="940" height="808" alt="nslookup" src="https://github.com/user-attachments/assets/1ddb75cc-1ec4-4df0-b2e7-0abf7ea4b7f5" />
+
+<img width="2118" height="890" alt="dns traffic" src="https://github.com/user-attachments/assets/3bb79f79-e0cd-4686-878d-98eb5e9df303" />
+
   </p>
 
   <p>
@@ -97,6 +113,9 @@ img command line with ipconfig /renew and wireshark showing triaffic captureed
 
   <p>
     img wireshark capture of all the spam traffic
+
+   <img width="2100" height="922" alt="Screenshot 2025-10-14 211205" src="https://github.com/user-attachments/assets/ae803eca-3cd6-4332-818a-f76ef4b44ce7" />
+
   </p>
 
   <p>

@@ -30,7 +30,8 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <h2>Actions and Observations</h2>
 
 <p>
-<img> pic of wireshark website and homepage
+<img> pic of wireshark website and homepage <img width="2032" height="1062" alt="wireshark website" src="https://github.com/user-attachments/assets/c020cf1c-d09a-4454-803d-bdd653ed4a30" />
+
 </p>
 <p>
 First activity we want to do with this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the triaffic the computer is both recieving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
@@ -38,7 +39,10 @@ First activity we want to do with this tutorial is to install wireshark from Wir
 <br />
 
 <p>
-<img> pic of unfiltered data and pic of ICMP filtered data
+<img> pic of unfiltered data and pic of ICMP filtered data <img width="1452" height="304" alt="icmp in filter bar" src="https://github.com/user-attachments/assets/a22a1380-5a35-40eb-8608-629e430ee70a" />
+ <img width="2424" height="1162" alt="unfiltered wireshark data" src="https://github.com/user-attachments/assets/af467ffa-c12c-420c-902a-0121846a9eb9" /> <img width="2206" height="1392" alt="icmp ping demo" src="https://github.com/user-attachments/assets/ec6fd547-2660-41c9-b60c-9992bbe05a82" />
+
+
 </p>
 <p>
 when wireshark is initated, you will see the device is both sending and reeving lots of data, that is because even without interacing on the devices it is constantly having network activity. to see the specific trafic we want to see in this exersize we will use the filter section at the top of the window. The first protocall we want to observw is Internet Control Message Protocl(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping a ip adress, ping is used to test the connection between two devices over the network. in the example above we ping a secondary VM, in wireshark we see the ping request and recived packets from the Vm we are using and from the secondary VM
@@ -46,10 +50,26 @@ when wireshark is initated, you will see the device is both sending and reeving 
 <br />
 
 <p>
-<img azure NSGs settingss and constant pings before and after network change/>
+<img azure NSGs settingss and constant pings before and after network change/> 
+<img width="944" height="436" alt="endless ping pre NSG" src="https://github.com/user-attachments/assets/5828c0fa-dfe3-4803-ab2a-969dd2572a93" />
+<img width="1664" height="1358" alt="wireshark and console endless ping" src="https://github.com/user-attachments/assets/b33f834c-f41e-4fe4-86e6-fd5c40d42951" />
+
 </p>
 <p>
-in this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM to reject all incoming ping requests. NSGs are Azures Firewall so to speake. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t, as before we get the same request and recieved packets as before. We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and click on "linux-VM-nsg", here we will click on ADD, tis will open an options window to create our new rule. the settings we want to change will be, "destination port ranges", we will change this to "*" as that represents any and ICMP doesnt use a port. we will also change "Protocol" to ICMPv4, the protocol ping uses. we will change "Action" to deny, to deny all incoming pings. and lastly we will change "Priority" to 290, this will set the new rule at the top of the list ensuring it is enacted first. the NSG works somewhat like a firewall in this sense
+in this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM to reject all incoming ping requests. NSGs are Azures Firewall so to speake. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t, as before we get the same request and recieved packets as before. 
+  <img width="1342" height="1266" alt="VM linux network settings" src="https://github.com/user-attachments/assets/52df0f30-08be-4a48-9ff9-8cf455a3afa6" />
+<img width="1606" height="1202" alt="azure NSG link" src="https://github.com/user-attachments/assets/ae08d127-cd72-49d0-a45f-391855f35367" />
+<img width="1010" height="1096" alt="inbound security settings link" src="https://github.com/user-attachments/assets/cad5b68e-940c-4137-8bb6-ed2ac43a7841" />
+<img width="1778" height="1282" alt="pre security rule page" src="https://github.com/user-attachments/assets/fc8d9ae8-03ac-44b0-80ad-56257fe7ba81" />
+
+<img width="2060" height="890" alt="post-ICMP-rule" src="https://github.com/user-attachments/assets/f7cac307-da9c-4cc9-97a0-e14d30ae39d6" />
+
+  We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and click on "linux-VM-nsg", here we will click on ADD, tis will open an options window to create our new rule. the settings we want to change will be, "destination port ranges", we will change this to "*" as that represents any and ICMP doesnt use a port. we will also change "Protocol" to ICMPv4, the protocol ping uses. we will change "Action" to deny, to deny all incoming pings. and lastly we will change "Priority" to 290, this will set the new rule at the top of the list ensuring it is enacted first. 
+
+<img width="1180" height="1010" alt="console page ping time outs" src="https://github.com/user-attachments/assets/cea8b6b9-14cb-493f-9d91-c80149ee9e5b" />
+
+<img width="1900" height="770" alt="wireshark packets after ping denial" src="https://github.com/user-attachments/assets/fd3312db-c8db-49ab-8afb-64bf2950db00" />
+after the rule has been added and we go back to wireshark and the command consile we can see that the ping requests are not going through and the requests are timing out instead, THats because the NSGs on the linux machine is blocking all data related to ICMP. the NSG works somewhat like a firewall in this sense
 
   <p>
     img command line with commaand <ssh "username@<private ip> and wireshark packet recording of ssh data

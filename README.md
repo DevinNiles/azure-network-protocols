@@ -30,34 +30,47 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <h2>Actions and Observations</h2>
 
 <p>
-<img> pic of wireshark website and homepage <img width="2032" height="1062" alt="wireshark website" src="https://github.com/user-attachments/assets/c020cf1c-d09a-4454-803d-bdd653ed4a30" />
-
+<img> This picture shows the wireshark homepage where you can download the application <img width="2032" height="1062" alt="wireshark website" src="https://github.com/user-attachments/assets/c020cf1c-d09a-4454-803d-bdd653ed4a30" />
 </p>
-<p>
-First activity we want to do with this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the triaffic the computer is both recieving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
-</p>
-<br />
 
 <p>
-<img> pic of unfiltered data and pic of ICMP filtered data <img width="1452" height="304" alt="icmp in filter bar" src="https://github.com/user-attachments/assets/a22a1380-5a35-40eb-8608-629e430ee70a" />
- <img width="2424" height="1162" alt="unfiltered wireshark data" src="https://github.com/user-attachments/assets/af467ffa-c12c-420c-902a-0121846a9eb9" /> <img width="2206" height="1392" alt="icmp ping demo" src="https://github.com/user-attachments/assets/ec6fd547-2660-41c9-b60c-9992bbe05a82" />
-
-
-</p>
-<p>
-when wireshark is initated, you will see the device is both sending and reeving lots of data, that is because even without interacing on the devices it is constantly having network activity. to see the specific trafic we want to see in this exersize we will use the filter section at the top of the window. The first protocall we want to observw is Internet Control Message Protocl(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping a ip adress, ping is used to test the connection between two devices over the network. in the example above we ping a secondary VM, in wireshark we see the ping request and recived packets from the Vm we are using and from the secondary VM
+First activity we want to do with this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the traffic the computer is both receiving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
 </p>
 <br />
 
 <p>
+ This picture shows where the filter bar is in wireshark and the filter used in this excercise <img width="1452" height="304" alt="icmp in filter bar" src="https://github.com/user-attachments/assets/a22a1380-5a35-40eb-8608-629e430ee70a" />
+</p>
+<p>
+ This picture shows the data being captured by wireshark without a filter in place
+ <img width="2424" height="1162" alt="unfiltered wireshark data" src="https://github.com/user-attachments/assets/af467ffa-c12c-420c-902a-0121846a9eb9" /> 
+</p>
+<p>
+ This picture shows the filtered ICMP data that occured from pinging the secondary VM
+ <img width="2206" height="1392" alt="icmp ping demo" src="https://github.com/user-attachments/assets/ec6fd547-2660-41c9-b60c-9992bbe05a82" />
+</p>
+
+</p>
+<p>
+When wireshark is initated, you will see the device is both sending and receiving lots of data, that is because even without interacting on the device, it is constantly having network activity. To see the specific traffic we want to see in this exercise we will use the filter section at the top of the window. The first protocal we want to observe is Internet Control Message Protocl(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping an ip address, ping is used to test the connection between two devices over the network. in the example above we ping a secondary VM, in wireshark we see the ping request and recived packets from the Vm we are using and from the secondary VM
+</p>
+<br />
+
+<p>
+ This picture shows the windows VM sending out constant ping requests to the linux VM
 <img azure NSGs settingss and constant pings before and after network change/> 
+</p>
+<P>
 <img width="944" height="436" alt="endless ping pre NSG" src="https://github.com/user-attachments/assets/5828c0fa-dfe3-4803-ab2a-969dd2572a93" />
+</P>
+<P>
 <img width="1664" height="1358" alt="wireshark and console endless ping" src="https://github.com/user-attachments/assets/b33f834c-f41e-4fe4-86e6-fd5c40d42951" />
+</P>
 
 </p>
 <p>
-in this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM to reject all incoming ping requests. NSGs are Azures Firewall so to speake. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t, as before we get the same request and recieved packets as before. 
-  <img width="1342" height="1266" alt="VM linux network settings" src="https://github.com/user-attachments/assets/52df0f30-08be-4a48-9ff9-8cf455a3afa6" />
+In this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM to reject all incoming ping requests. NSGs are Azures Firewall so to speak. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t", as before we get the same request and recieved packets. 
+<img width="1342" height="1266" alt="VM linux network settings" src="https://github.com/user-attachments/assets/52df0f30-08be-4a48-9ff9-8cf455a3afa6" />
 <img width="1606" height="1202" alt="azure NSG link" src="https://github.com/user-attachments/assets/ae08d127-cd72-49d0-a45f-391855f35367" />
 <img width="1010" height="1096" alt="inbound security settings link" src="https://github.com/user-attachments/assets/cad5b68e-940c-4137-8bb6-ed2ac43a7841" />
 <img width="1778" height="1282" alt="pre security rule page" src="https://github.com/user-attachments/assets/fc8d9ae8-03ac-44b0-80ad-56257fe7ba81" />

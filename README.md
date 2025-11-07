@@ -56,32 +56,50 @@ When wireshark is initated, you will see the device is both sending and receivin
 </p>
 <br />
 
-<p>
- This picture shows the windows VM sending out constant ping requests to the linux VM
-<img azure NSGs settingss and constant pings before and after network change/> 
-</p>
+
 <P>
+ This picture shows the windows VM sending out constant ping requests to the linux VM
 <img width="944" height="436" alt="endless ping pre NSG" src="https://github.com/user-attachments/assets/5828c0fa-dfe3-4803-ab2a-969dd2572a93" />
 </P>
 <P>
+ This picture shows the endless pings on the console as well as the packets being recorded in wireshark
 <img width="1664" height="1358" alt="wireshark and console endless ping" src="https://github.com/user-attachments/assets/b33f834c-f41e-4fe4-86e6-fd5c40d42951" />
 </P>
 
-</p>
 <p>
 In this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM to reject all incoming ping requests. NSGs are Azures Firewall so to speak. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t", as before we get the same request and recieved packets. 
+
+<p>
+ This picture shows the network settings on azure for the Linux VM
 <img width="1342" height="1266" alt="VM linux network settings" src="https://github.com/user-attachments/assets/52df0f30-08be-4a48-9ff9-8cf455a3afa6" />
+</p>
+<P>
+ This picture shows where to click to access the VMs NSG
 <img width="1606" height="1202" alt="azure NSG link" src="https://github.com/user-attachments/assets/ae08d127-cd72-49d0-a45f-391855f35367" />
+</p>
+<P>
+ This picture shows where the link to access inbound security settings 
 <img width="1010" height="1096" alt="inbound security settings link" src="https://github.com/user-attachments/assets/cad5b68e-940c-4137-8bb6-ed2ac43a7841" />
+</p>
+<P>
+ This picture shows the security rules page before adding the new rule to block ICMP traffic
 <img width="1778" height="1282" alt="pre security rule page" src="https://github.com/user-attachments/assets/fc8d9ae8-03ac-44b0-80ad-56257fe7ba81" />
-
+</p>
+<p>
+ This picture shows the security rules page after adding the new rule to block ICMP traffic
 <img width="2060" height="890" alt="post-ICMP-rule" src="https://github.com/user-attachments/assets/f7cac307-da9c-4cc9-97a0-e14d30ae39d6" />
-
+</p>
   We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and click on "linux-VM-nsg", here we will click on ADD, tis will open an options window to create our new rule. the settings we want to change will be, "destination port ranges", we will change this to "*" as that represents any and ICMP doesnt use a port. we will also change "Protocol" to ICMPv4, the protocol ping uses. we will change "Action" to deny, to deny all incoming pings. and lastly we will change "Priority" to 290, this will set the new rule at the top of the list ensuring it is enacted first. 
 
+<p>
+ This picure shows the console page timing out on its ping requests because it can no long reach the Linux VM
 <img width="1180" height="1010" alt="console page ping time outs" src="https://github.com/user-attachments/assets/cea8b6b9-14cb-493f-9d91-c80149ee9e5b" />
-
+</p>
+<p>
+ This picture shows the packets recorded from the failed ping attampts
 <img width="1900" height="770" alt="wireshark packets after ping denial" src="https://github.com/user-attachments/assets/fd3312db-c8db-49ab-8afb-64bf2950db00" />
+</p>
+ 
 after the rule has been added and we go back to wireshark and the command consile we can see that the ping requests are not going through and the requests are timing out instead, THats because the NSGs on the linux machine is blocking all data related to ICMP. the NSG works somewhat like a firewall in this sense
 
   <p>

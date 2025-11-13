@@ -89,8 +89,9 @@ In this next activity we will see what happens when we change the Network Securi
  This picture shows the security rules page after adding the new rule to block ICMP traffic
 <img width="2060" height="890" alt="post-ICMP-rule" src="https://github.com/user-attachments/assets/f7cac307-da9c-4cc9-97a0-e14d30ae39d6" />
 </p>
+<p>
   We will then go into azure VM network settings and change it so that it wont accpect any inbound traffic, to do this we will log into azure, got to our desired VM and open its network settings, in those setting we will go to the NSG settings and click on "linux-VM-nsg", here we will click on ADD, tis will open an options window to create our new rule. the settings we want to change will be, "destination port ranges", we will change this to "*" as that represents any and ICMP doesnt use a port. we will also change "Protocol" to ICMPv4, the protocol ping uses. we will change "Action" to deny, to deny all incoming pings. and lastly we will change "Priority" to 290, this will set the new rule at the top of the list ensuring it is enacted first. 
-
+</p>
 <p>
  This picure shows the console page timing out on its ping requests because it can no long reach the Linux VM
 <img width="1180" height="1010" alt="console page ping time outs" src="https://github.com/user-attachments/assets/cea8b6b9-14cb-493f-9d91-c80149ee9e5b" />
@@ -99,31 +100,34 @@ In this next activity we will see what happens when we change the Network Securi
  This picture shows the packets recorded from the failed ping attampts
 <img width="1900" height="770" alt="wireshark packets after ping denial" src="https://github.com/user-attachments/assets/fd3312db-c8db-49ab-8afb-64bf2950db00" />
 </p>
- 
+ <p>
 after the rule has been added and we go back to wireshark and the command consile we can see that the ping requests are not going through and the requests are timing out instead, THats because the NSGs on the linux machine is blocking all data related to ICMP. the NSG works somewhat like a firewall in this sense
-
+ </p>
   <p>
-
+   this picture shows wireshark packets with the SSH filter 
 <img width="1910" height="946" alt="wireshark ssh filtered" src="https://github.com/user-attachments/assets/949dbf54-bfe8-4b94-9579-4acefc26c39c" />
-
-<img width="1744" height="972" alt="ssh connection to linux" src="https://github.com/user-attachments/assets/4f72911b-d9ae-4a62-b1f3-e84781612477" />
-
-
   </p>
+<p>
+ this picture shows the windows VM command console connected to the linux VM using SSH
+<img width="1744" height="972" alt="ssh connection to linux" src="https://github.com/user-attachments/assets/4f72911b-d9ae-4a62-b1f3-e84781612477" />
+</p>
+
   <P>
 in this next activity we are going to observe the triffic recorded when using the SSH command to remotely connect to the secondry VM using the command line. first step is to put the "ssh" filter in the section of wireshark. next we will open the command line and input the command <ssh labuser@10.0.0.4>, labuser is the username one the secondary VM and 10.0.0.4 is the private ip address of the VM, type yes for the question to continue with you connections, next it will ask for the password. after connecting the command line will dispaly the username and IP of the vm we connected to, on wireshark there will be traffic that was used to established the connections. notice as well that any keystroke in the command line will create trafffic, tis is because the command line is directing controling the device and that data is sent over the network. also note thhat if you dive into the data captured with wireshark, you will see its all encrypted, all data sent using SSH is designed this way
   </P>
 
   <p>
-img command line with ipconfig /renew and wireshark showing triaffic captureed
-
+this pictures shows running the custom command line script to release and renew our IP address through DNS
 <img width="1210" height="904" alt="dhcp bat script command" src="https://github.com/user-attachments/assets/73bb8c4f-02ac-404a-8416-97803db94f72" />
-
-<img width="522" height="202" alt="dhcp renew release script" src="https://github.com/user-attachments/assets/3a02120b-601d-42e1-9153-a4b7fab37acf" />
-
- <img width="1564" height="848" alt="dhcp wireshark activity" src="https://github.com/user-attachments/assets/52f0f3f5-2957-47f6-befb-30e49bb484dc" />
-
   </p>
+<p>
+ this image shows the scipts containtants
+<img width="522" height="202" alt="dhcp renew release script" src="https://github.com/user-attachments/assets/3a02120b-601d-42e1-9153-a4b7fab37acf" />
+</p>
+<p>
+ This image shows the packets captured with the DCHP filter enabled
+ <img width="1564" height="848" alt="dhcp wireshark activity" src="https://github.com/user-attachments/assets/52f0f3f5-2957-47f6-befb-30e49bb484dc" />
+ </p>
 
   <p>
     in this next activity we will observe traffic involved with DHCP. in wireshark's filter bar we will put the filter DCHP, open command line as admin and we will run a command to ask for a new IP address. in command line we will run the command "ipconfig /renew" this will make the device brodast a signal to request a new IP andress. the DNS will see this signal and acknolage that request, but since the device already has an IP address, the interaction ends there instead of the typical full interation when a device needs their first IP address, you can get the full paket traffic if you use the command /releaase but when using a remote desktop connection, it severs the connetion.

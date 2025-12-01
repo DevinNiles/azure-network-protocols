@@ -134,12 +134,12 @@ this pictures shows running the custom command line script to release and renew 
   </p>
 
   <p>
-    img wireshark traffic after ussing nslookup, command console with the nslookup results
-
+    This image shows the console command NSLookup of popular websites
    <img width="940" height="808" alt="nslookup" src="https://github.com/user-attachments/assets/1ddb75cc-1ec4-4df0-b2e7-0abf7ea4b7f5" />
-
+  </p>
+  <p>
+   this image show the packets captured on wireshark with the DNS filter in place
 <img width="2118" height="890" alt="dns traffic" src="https://github.com/user-attachments/assets/3bb79f79-e0cd-4686-878d-98eb5e9df303" />
-
   </p>
 
   <p>
@@ -147,10 +147,8 @@ this pictures shows running the custom command line script to release and renew 
   </p>
 
   <p>
-    img wireshark capture of all the spam traffic
-
-   <img width="2100" height="922" alt="Screenshot 2025-10-14 211205" src="https://github.com/user-attachments/assets/ae803eca-3cd6-4332-818a-f76ef4b44ce7" />
-
+    This image shows the packets captured on wireshark with the filter "tcp.port = 3389" in place
+    <img width="2100" height="922" alt="Screenshot 2025-10-14 211205" src="https://github.com/user-attachments/assets/ae803eca-3cd6-4332-818a-f76ef4b44ce7" />
   </p>
 
   <p>

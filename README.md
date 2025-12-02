@@ -110,6 +110,8 @@ In this next activity we will see what happens when we change the Network Securi
  <p>
 After the rule has been added and we go back to wireshark and the command console, we can see that the ping requests are not going through and the requests are timing out instead, Thats because the NSGs on the linux machine is blocking all data related to ICMP. The NSGs works somewhat like a firewall in this sense.
  </p>
+ 
+ <h2>Activity 4 - Observing SSH traffic</h2>
   <p>
    This picture shows wireshark packets with the SSH filter 
 <img width="1910" height="946" alt="wireshark ssh filtered" src="https://github.com/user-attachments/assets/949dbf54-bfe8-4b94-9579-4acefc26c39c" />
@@ -119,14 +121,13 @@ After the rule has been added and we go back to wireshark and the command consol
 <img width="1744" height="972" alt="ssh connection to linux" src="https://github.com/user-attachments/assets/4f72911b-d9ae-4a62-b1f3-e84781612477" />
 </p>
 
-<h2>Activity 4 - Observing SSH traffic</h2>
-  <P>
-   
+ <P>   
 In this next activity we are going to observe the traffic recorded when using the SSH command to remotely connect to the secondry VM using the command line. First step is to put the "SSH" filter in the filter bar section of wireshark. Next we will open the command line and input the command <ssh labuser@10.0.0.4>, labuser is the username one the secondary VM and 10.0.0.4 is the private ip address of the VM, type yes for the question to continue with your connections, next it will ask for the password. After connecting the command line, it will dispaly the username and IP of the VM we connected to, on wireshark there will be traffic that was used to established the connections. Notice as well that any keystroke in the command line will create trafffic, this is because the command line is directly controlling the device and that data is sent over the network. Also note that if you dive into the data captured with wireshark, you will see its all encrypted, all data sent using SSH is designed this way
   </P>
 
+<h2>Activity 5 - Observing DHCP traffic</h2>
   <p>
-This pictures shows running the custom command line script to release and renew our IP address through DNS
+This pictures shows running the custom command line script to release and renew our IP address through the DHCP server
 <img width="1210" height="904" alt="dhcp bat script command" src="https://github.com/user-attachments/assets/73bb8c4f-02ac-404a-8416-97803db94f72" />
   </p>
 <p>
@@ -137,13 +138,12 @@ This pictures shows running the custom command line script to release and renew 
  This image shows the packets captured with the DCHP filter enabled
  <img width="1564" height="848" alt="dhcp wireshark activity" src="https://github.com/user-attachments/assets/52f0f3f5-2957-47f6-befb-30e49bb484dc" />
  </p>
- 
-<h2>Activity 5 - Observing DHCP traffic</h2>
+
   <p>
-    
    In this next activity we will observe traffic involved with DHCP. The DHCP server automatically assigns IP addresses and other network configuration settings to devices on a network. In wireshark's filter bar we will put the filter DHCP, next open command line as admin and we will run a script to release our IP address then immeadiatly request a new one with the commands "ipconfig /release" and "ipconfig /renew". In command line we will run the command "./dhcp.bat" this will run our custom script allowing the device to both release and request a new IP address, doing this allows us to capture the full process that the DHCP goes through when issuing IP addresses. In wireshark we can see the steps the DHCP goes though, Discover: When a device connects to the network, it broadcasts a request for an IP address. Offer: The DHCP server responds with a "lease" or an offer of an available IP address. Request: The device accepts the offer and formally requests to use that specific IP address. Acknowledge: The DHCP server confirms the lease and assigns the IP address and other configuration details to the device.
   </p>
 
+<h2>Activity 6 - Observing DNS Traffic</h2>
   <p>
     This image shows the console command NSLookup of popular websites
    <img width="940" height="808" alt="nslookup" src="https://github.com/user-attachments/assets/1ddb75cc-1ec4-4df0-b2e7-0abf7ea4b7f5" />
@@ -153,16 +153,16 @@ This pictures shows running the custom command line script to release and renew 
 <img width="2118" height="890" alt="dns traffic" src="https://github.com/user-attachments/assets/3bb79f79-e0cd-4686-878d-98eb5e9df303" />
   </p>
   
-<h2>Activity 6 - Observing DNS Traffic</h2>
   <p>  
    In this ativity we will observe traffic involved with DNS, Domain Naming System. the purpose of dns is to translate human readable website names into IP adresses. for this activity we will use the command line command "nslookup", with this command we can enter a website and get the IP address assosiated with it. First step is to enter the DNS filter in the filter bar on wireshark. In the pictures above we used nslookup to find the IP addresses of both disney.com and pixar.com, and in wireshark we can see all the traffic used to get that information.   
   </p>
 
+<h2>Activity 7 - Remote Desktop Protocal (RDP)</h2>
   <p>
     This image shows the packets captured on wireshark with the filter "tcp.port = 3389" in place
     <img width="2100" height="922" alt="Screenshot 2025-10-14 211205" src="https://github.com/user-attachments/assets/ae803eca-3cd6-4332-818a-f76ef4b44ce7" />
   </p>
-<h2>Activity 7 - Remote Desktop Protocal (RDP)</h2>
+
   <p>
     In this activity we will observe the traffic involving the Remote Desktop Protocal (RDP). RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389" into the filter bar, this is the network port RDP uses to establish a connection. After starting the packet capture we can already see lots of network activity, this is beause we are already remotely connected to the VM and thats the data we are seeing. The RDP connection is onstantly streaming an image to our personal device so the traffic is frequent and constant. comparing SSH to RDP, SSH only sends network data when we interact with the connection between the devices, where as RDP is always sending data whether we are typing or not.
   </p>

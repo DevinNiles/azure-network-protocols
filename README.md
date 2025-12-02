@@ -23,9 +23,10 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Activity 1 - install wire shark on VM
 - Activity 2 - inpsect packet data and use ICMP filter
 - Activity 3 - Network Security Groups(NSGs) effect on data traffic
-- Activity 4 - DCHP filter and trafiic
-- Activity 5 - DNS filter and traffic
-- Activity 6 - RDP filter and traffic
+- Activity 4 - SSH filter and traffic
+- Activity 5 - DHCP filter and trafiic
+- Activity 6 - DNS filter and traffic
+- Activity 7 - RDP filter and traffic
 
 <h2>Actions and Observations</h2>
 
@@ -34,6 +35,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 </p>
 
 <p>
+ Activity 1 - Wireshark
 First activity in this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the traffic the computer is both receiving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
 </p>
 <br />
@@ -52,7 +54,8 @@ First activity in this tutorial is to install wireshark from Wireshark.org, this
 
 </p>
 <p>
-When wireshark is initated, you will see the device is both sending and receiving lots of data, that is because even without interacting on the device, the device is constantly having network activity. To see the specific traffic we want to see in this exercise we will use the filter section at the top of the window. The first protocol we want to observe is Internet Control Message Protocol(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping an ip address, ping is used to test the connection between two devices over the network. in the example above we ping a secondary VM, in wireshark we see the ping request and recived packets from the VM we are using and from the secondary VM
+ Activity 2 - ICMP and wireshark filter bar
+When wireshark is initated, you will see the device is both sending and receiving lots of data, that is because even without interacting on the device, the device is constantly having network activity. To see the specific traffic we want to see in this exercise we will use the filter section at the top of the window. The first protocol we want to observe is Internet Control Message Protocol(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping an ip address, ping is used to test the connection between two devices over the network. In the example above we ping a secondary VM, in wireshark we see the ping request and received packets from the VM we are using and from the secondary VM
 </p>
 <br />
 
@@ -67,6 +70,7 @@ When wireshark is initated, you will see the device is both sending and receivin
 </P>
 
 <p>
+ Activity 3 - Azure NSGs
 In this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM in Microsoft Azure to reject all incoming ping requests. NSGs are Azure's Firewall so to speak. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t", as before we get the same request and recieved packets. 
 
 <p>
@@ -113,6 +117,7 @@ After the rule has been added and we go back to wireshark and the command consol
 </p>
 
   <P>
+   Activity 4 - Observing SSH traffic
 In this next activity we are going to observe the traffic recorded when using the SSH command to remotely connect to the secondry VM using the command line. First step is to put the "SSH" filter in the filter bar section of wireshark. Next we will open the command line and input the command <ssh labuser@10.0.0.4>, labuser is the username one the secondary VM and 10.0.0.4 is the private ip address of the VM, type yes for the question to continue with your connections, next it will ask for the password. After connecting the command line, it will dispaly the username and IP of the VM we connected to, on wireshark there will be traffic that was used to established the connections. Notice as well that any keystroke in the command line will create trafffic, this is because the command line is directly controlling the device and that data is sent over the network. Also note that if you dive into the data captured with wireshark, you will see its all encrypted, all data sent using SSH is designed this way
   </P>
 
@@ -130,7 +135,8 @@ This pictures shows running the custom command line script to release and renew 
  </p>
 
   <p>
-    In this next activity we will observe traffic involved with DHCP. The DHCP server automatically assigns IP addresses and other network configuration settings to devices on a network. In wireshark's filter bar we will put the filter DHCP, next open command line as admin and we will run a script to release our IP address then immeadiatly request a new one with the commands "ipconfig /release" and "ipconfig /renew". In command line we will run the command "./dhcp.bat" this will run our custom script allowing the device to both release and request a new IP address, doing this allows us to capture the full process that the DHCP goes through when issuing IP addresses. In wireshark we can see the steps the DHCP goes though, "discover", When a device connects to the network, it broadcasts a request for an IP address. "offer" The DHCP server responds with a "lease" or an offer of an available IP address. Request: The device accepts the offer and formally requests to use that specific IP address. Acknowledge: The DHCP server confirms the lease and assigns the IP address and other configuration details to the device.
+    Activity 5 - Observing DHCP traffic
+   In this next activity we will observe traffic involved with DHCP. The DHCP server automatically assigns IP addresses and other network configuration settings to devices on a network. In wireshark's filter bar we will put the filter DHCP, next open command line as admin and we will run a script to release our IP address then immeadiatly request a new one with the commands "ipconfig /release" and "ipconfig /renew". In command line we will run the command "./dhcp.bat" this will run our custom script allowing the device to both release and request a new IP address, doing this allows us to capture the full process that the DHCP goes through when issuing IP addresses. In wireshark we can see the steps the DHCP goes though, Discover: When a device connects to the network, it broadcasts a request for an IP address. Offer: The DHCP server responds with a "lease" or an offer of an available IP address. Request: The device accepts the offer and formally requests to use that specific IP address. Acknowledge: The DHCP server confirms the lease and assigns the IP address and other configuration details to the device.
   </p>
 
   <p>
@@ -143,7 +149,8 @@ This pictures shows running the custom command line script to release and renew 
   </p>
 
   <p>
-    Activity 4 - Obsevering DNS Traffic, in this ativity we will observe trafiic involved with DNS, Domain Naming System. the purpose of dns is to translate human readable website names into IP adresses. for this activity we will use the ommand line command "nslookup", with this command we can enter a website and get the IP address assosiated with it. First step is to enter the DNS filter in the filter bar on wireshark. in the pictures above we use nslookup to find the IP addresses of both disney.com and pixar.com, and in wireshark we can see all the traffic used to get that information   
+    Activity 6 - Observing DNS Traffic
+   In this ativity we will observe traffic involved with DNS, Domain Naming System. the purpose of dns is to translate human readable website names into IP adresses. for this activity we will use the command line command "nslookup", with this command we can enter a website and get the IP address assosiated with it. First step is to enter the DNS filter in the filter bar on wireshark. In the pictures above we used nslookup to find the IP addresses of both disney.com and pixar.com, and in wireshark we can see all the traffic used to get that information.   
   </p>
 
   <p>
@@ -152,7 +159,7 @@ This pictures shows running the custom command line script to release and renew 
   </p>
 
   <p>
-    Activity 5 - Remote Desktop Protocal (RDP)
-    in this activity we will observe the traffic involving the RDP. RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389" into the filter bar, this is the network port RDP uses to establish a connection. After starting the packet capture we can already see lots of network activity, this is beause we are already remotely connected to the VM and thats the data we are seeing. The RDP connection is onstantly streaming an image to our personal device so the traffic is frequent and constant. comparing SSH to RDP, SSH only sends network data when we interat with the connection between the devices, where as RDP is always sending data whether we are typing or not.
+    Activity 7 - Remote Desktop Protocal (RDP)
+    In this activity we will observe the traffic involving the Remote Desktop Protocal (RDP). RDP is the protocol used when establishing a remote connection between two devices. In wireshark, we will enter "tcp.port == 3389" into the filter bar, this is the network port RDP uses to establish a connection. After starting the packet capture we can already see lots of network activity, this is beause we are already remotely connected to the VM and thats the data we are seeing. The RDP connection is onstantly streaming an image to our personal device so the traffic is frequent and constant. comparing SSH to RDP, SSH only sends network data when we interact with the connection between the devices, where as RDP is always sending data whether we are typing or not.
   </p>
 <br />

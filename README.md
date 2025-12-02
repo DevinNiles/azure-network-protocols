@@ -28,19 +28,17 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Activity 6 - DNS filter and traffic
 - Activity 7 - RDP filter and traffic
 
-<h2>Actions and Observations</h2>
-
+<h2>Activity 1 - Wireshark</h2>
 <p>
 <img> This picture shows the wireshark homepage where you can download the application <img width="2032" height="1062" alt="wireshark website" src="https://github.com/user-attachments/assets/c020cf1c-d09a-4454-803d-bdd653ed4a30" />
 </p>
 
-
- <h2>Activity 1 - Wireshark</h2>
  <p>
 First activity in this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the traffic the computer is both receiving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
 </p>
 <br />
 
+<h2>Activity 2 - ICMP and wireshark filter bar</h2>
 <p>
  This picture shows where the filter bar is in wireshark and the filter used in this excercise <img width="1452" height="304" alt="icmp in filter bar" src="https://github.com/user-attachments/assets/a22a1380-5a35-40eb-8608-629e430ee70a" />
 </p>
@@ -53,15 +51,13 @@ First activity in this tutorial is to install wireshark from Wireshark.org, this
  <img width="2206" height="1392" alt="icmp ping demo" src="https://github.com/user-attachments/assets/ec6fd547-2660-41c9-b60c-9992bbe05a82" />
 </p>
 
-</p>
-<h2>Activity 2 - ICMP and wireshark filter bar</h2>
 <p>
  
 When wireshark is initated, you will see the device is both sending and receiving lots of data, that is because even without interacting on the device, the device is constantly having network activity. To see the specific traffic we want to see in this exercise we will use the filter section at the top of the window. The first protocol we want to observe is Internet Control Message Protocol(ICMP), we will type ICMP into the filter bar. IMCP is used when you want to ping an ip address, ping is used to test the connection between two devices over the network. In the example above we ping a secondary VM, in wireshark we see the ping request and received packets from the VM we are using and from the secondary VM
 </p>
 <br />
 
-
+<h2>Activity 3 - Azure NSGs</h2>
 <P>
  This picture shows the windows VM sending out constant ping requests to the linux VM
 <img width="944" height="436" alt="endless ping pre NSG" src="https://github.com/user-attachments/assets/5828c0fa-dfe3-4803-ab2a-969dd2572a93" />
@@ -71,7 +67,6 @@ When wireshark is initated, you will see the device is both sending and receivin
 <img width="1664" height="1358" alt="wireshark and console endless ping" src="https://github.com/user-attachments/assets/b33f834c-f41e-4fe4-86e6-fd5c40d42951" />
 </P>
 
-<h2>Activity 3 - Azure NSGs</h2>
 <p>
  
 In this next activity we will see what happens when we change the Network Security Groups (NSGs) on the secondary VM in Microsoft Azure to reject all incoming ping requests. NSGs are Azure's Firewall so to speak. First we will set up a constant ping command in our primary VM to ping the other VM endlessly with the command "ping 10.0.0.5 -t", as before we get the same request and recieved packets. 

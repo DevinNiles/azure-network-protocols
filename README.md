@@ -126,7 +126,7 @@ This pictures shows running the custom command line script to release and renew 
 <img width="1210" height="904" alt="dhcp bat script command" src="https://github.com/user-attachments/assets/73bb8c4f-02ac-404a-8416-97803db94f72" />
   </p>
 <p>
- This image shows the scipts code
+ This image shows the script's code
 <img width="522" height="202" alt="dhcp renew release script" src="https://github.com/user-attachments/assets/3a02120b-601d-42e1-9153-a4b7fab37acf" />
 </p>
 <p>

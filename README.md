@@ -34,8 +34,9 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <img> This picture shows the wireshark homepage where you can download the application <img width="2032" height="1062" alt="wireshark website" src="https://github.com/user-attachments/assets/c020cf1c-d09a-4454-803d-bdd653ed4a30" />
 </p>
 
-<p>
- Activity 1 - Wireshark
+
+ <h2>Activity 1 - Wireshark</h2>
+ <p>
 First activity in this tutorial is to install wireshark from Wireshark.org, this application is used so the users may observe the traffic the computer is both receiving as well as sending. After installing Wireshark and opening the program, the home page will show us the network interface card the device is using, we will highlight that by cliking on it then clicking on the shark fin to start monitoring the network traffic on the device
 </p>
 <br />
